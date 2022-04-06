@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import '../src/styles/global/_index.scss';
+import '../styles/global/_index.scss';
 
 type AppProps = {
     Component: any;

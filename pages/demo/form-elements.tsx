@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import CommonPage from '../../src/pages/demo/form-elements';
-import { PlatformProvider, PlatformMode } from '../../src/context/platform-context';
+import CommonPage from '../../pages/demo/form-elements';
+import { PlatformProvider, PlatformMode } from '../../context/platform-context';
 
 const PLATFORM_MODE = process.env.NEXT_PUBLIC_NODE_ENV as PlatformMode;
 
