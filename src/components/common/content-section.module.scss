@@ -1,0 +1,45 @@
+@use 'sass:selector';
+
+@use '../../styles/mixins/layout.module.scss' as layout;
+@use '../../styles/constants/layout.module.scss' as cLayout;
+@use '../../styles/mixins/theme.module.scss' as theme;
+@use '../../styles/components/content-section.module.scss' as styles;
+
+.contentSection {
+    @include layout.section-x-padding;
+
+    display: flex;
+    justify-content: center;
+
+    @include styles.content-section;
+    @include theme.apply-theme-styles('content-section');
+
+    position: relative;
+    &.hasBackground {
+        background-color: transparent;
+    }
+}
+
+.contentSectionBox {
+    width: 100%;
+    
+    @include layout.content-width;
+    @include layout.content-y-padding;
+
+    @if cLayout.$content-has-container {
+        @include layout.content-x-padding;
+    }
+
+    @include styles.content-section-box;
+    @include theme.apply-theme-styles('content-section-box');
+}
+
+.contentSectionBackgroundContainer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+:export {
+    contentHasContainer: cLayout.$content-has-container;
+}

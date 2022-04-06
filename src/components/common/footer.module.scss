@@ -1,0 +1,16 @@
+@use '../../styles/components/footer.module.scss' as styles;
+
+.footer {
+    @include styles.footer-x-padding;
+    
+    display: flex;
+    justify-content: center;
+    @include styles.footer-text;
+    
+    @include styles.footer-background;
+}
+
+.footerContent {
+    @include styles.footer-content-width;
+    @include styles.footer-y-padding;
+}

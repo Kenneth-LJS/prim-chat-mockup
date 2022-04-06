@@ -1,0 +1,14 @@
+@use '../../styles/mixins/layout.module.scss' as layout;
+@use '../../styles/constants/layout.module.scss' as cLayout;
+@use '../../styles/components/content-section.module.scss' as styles;
+
+.contentSections {
+    @if cLayout.$content-has-container {
+        padding-top: cLayout.$section-gap;
+        padding-bottom: cLayout.$section-gap;
+
+        & > * + * {
+            margin-top: cLayout.$section-gap;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+$content-width: 900px;
+$page-x-padding-px: 20;
+$page-x-padding: #{$page-x-padding-px}px;
+
+$section-gap: 30px; // Only applicable if $content-has-container is set to true
+$section-y-padding: 20px;
+
+$content-x-padding: 20px;
+$content-y-padding: 30px;
+$content-has-container: false;
+
+$banner-height: 300px;
+
+$dialog-x-padding: 20px;
+$dialog-y-padding: 20px;

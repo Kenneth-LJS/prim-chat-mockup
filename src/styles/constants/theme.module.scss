@@ -1,0 +1,297 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:string';
+@use '../sass-utils/logic-util.scss';
+@use '../sass-utils/map-util.scss' as mapUtil;
+@use '../constants/layout.module.scss' as cLayout;
+@use '../constants/color.module.scss' as cColor;
+
+$themes: 'default', 'light', 'dark', 'highlight-a', 'highlight-b', 'highlight-c';
+
+@function make_theme(
+    $is-light,
+    $section-bg-color,
+    $header-color,
+    $text-color,
+    $link-color:
+        if(
+            $is-light,
+            color.adjust($text-color, $lightness: 25%),
+            color.adjust($text-color, $lightness: -25%)
+        ),
+    $link-hover-color: $text-color,
+    $button-color,
+    $button-bg-color,
+    $button-border-color,
+    $button-hover-color:
+        if(
+            $is-light,
+            color.adjust($button-color, $lightness: -10%),
+            color.adjust($button-color, $lightness: 10%)
+        ),
+    $button-hover-bg-color:
+        if(
+            $is-light,
+            color.adjust($button-bg-color, $lightness: -10%),
+            color.adjust($button-bg-color, $lightness: 10%)
+        ),
+    $button-hover-border-color:
+        if(
+            $is-light,
+            color.adjust($button-border-color, $lightness: -10%),
+            color.adjust($button-border-color, $lightness: 10%)
+        ),
+    $button-disabled-color:
+        color.adjust(
+            $button-color,
+            $saturation: -10%,
+            $lightness: if($is-light, -10%, 10%)
+        ),
+    $button-disabled-bg-color:
+        color.adjust(
+            $button-bg-color,
+            $saturation: -10%,
+            $lightness: if($is-light, -10%, 10%)
+        ),
+    $button-disabled-border-color:
+        color.adjust(
+            $button-border-color,
+            $saturation: -10%,
+            $lightness: if($is-light, -10%, 10%)
+        ),
+    $input-color,
+    $input-bg-color,
+    $input-border-color,
+    $input-hover-color:
+        if(
+            $is-light,
+            color.adjust($input-color, $lightness: -10%),
+            color.adjust($input-color, $lightness: 10%)
+        ),
+    $input-hover-bg-color: $input-bg-color,
+    $input-hover-border-color:
+        if(
+            $is-light,
+            color.adjust($input-border-color, $lightness: -10%),
+            color.adjust($input-border-color, $lightness: 10%)
+        ),
+    $input-disabled-color:
+        color.adjust(
+            $input-color,
+            $saturation: -10%,
+            $lightness: if($is-light, -10%, 10%)
+        ),
+    $input-disabled-bg-color:
+        color.adjust($input-bg-color, $saturation: -10%, $lightness: -10%),
+    $input-disabled-border-color:
+        color.adjust(
+            $input-border-color,
+            $saturation: -10%,
+            $lightness: if($is-light, -10%, 10%)
+        ),
+    $select-item-hover-color:
+        color.adjust($input-color, $lightness: if($is-light, -10%, 10%)),
+    $select-item-hover-bg-color:
+        color.adjust($input-bg-color, $lightness: if($is-light, -10%, 10%)),
+    $dialog-bg-color: $section-bg-color,
+    $dialog-close-button-color: $text-color
+) {
+    @return (
+        'content-section': (
+            background-color: if(cLayout.$content-has-container, transparent, $section-bg-color),
+        ),
+        'content-section-box': (
+            background-color: if(cLayout.$content-has-container, $section-bg-color, transparent),
+        ),
+        'title': (
+            color: $header-color,
+        ),
+        'subtitle': (
+            color: $header-color,
+        ),
+        'header-1': (
+            color: $header-color,
+        ),
+        'header-2': (
+            color: $header-color,
+        ),
+        'header-3': (
+            color: $header-color,
+        ),
+        'header-4': (
+            color: $header-color,
+        ),
+        'header-5': (
+            color: $header-color,
+        ),
+        'header-6': (
+            color: $header-color,
+        ),
+        'body': (
+            color: $text-color,
+        ),
+        'link': (
+            color: $link-color,
+        ),
+        'link:hover': (
+            color: $link-hover-color,
+        ),
+        'button': (
+            color: $button-color,
+            background-color: $button-bg-color,
+            border-color: $button-border-color,
+        ),
+        'button:hover': (
+            color: $button-hover-color,
+            background-color: $button-hover-bg-color,
+            border-color: $button-hover-border-color,
+        ),
+        'button:disabled': (
+            color: $button-disabled-color,
+            background-color: $button-disabled-bg-color,
+            border-color: $button-disabled-border-color,
+        ),
+        'input': (
+            color: $input-color,
+            background-color: $input-bg-color,
+            border-color: $input-border-color,
+        ),
+        'input:hover': (
+            color: $input-hover-color,
+            background-color: $input-hover-bg-color,
+            border-color: $input-hover-border-color,
+        ),
+        'input:disabled': (
+            color: $input-disabled-color,
+            background-color: $input-disabled-bg-color,
+            border-color: $input-disabled-border-color,
+        ),
+        'textarea': (
+            color: $input-color,
+            background-color: $input-bg-color,
+            border-color: $input-border-color,
+        ),
+        'textarea:hover': (
+            color: $input-hover-color,
+            background-color: $input-hover-bg-color,
+            border-color: $input-hover-border-color,
+        ),
+        'textarea:disabled': (
+            color: $input-disabled-color,
+            background-color: $input-disabled-bg-color,
+            border-color: $input-disabled-border-color,
+        ),
+        'select': (
+            color: $input-color,
+            background-color: $input-bg-color,
+            border-color: $input-border-color,
+        ),
+        'select:hover': (
+            color: $input-hover-color,
+            background-color: $input-hover-bg-color,
+            border-color: $input-hover-border-color,
+        ),
+        'select:disabled': (
+            color: $input-disabled-color,
+            background-color: $input-disabled-bg-color,
+            border-color: $input-disabled-border-color,
+        ),
+        'select-item': (
+            color: $input-hover-color,
+            background-color: $input-hover-bg-color,
+            border-color: $input-hover-border-color,
+        ),
+        'select-item:hover': (
+            color: $select-item-hover-color,
+            background-color: $select-item-hover-bg-color,
+            border-color: $input-hover-border-color,
+        ),
+        'dialog': (
+            background-color: $dialog-bg-color,
+        ),
+        'dialog-close-button-image': (
+            fill: $dialog-close-button-color,
+        )
+    );
+}
+
+$all-theme-colors: (
+    'light':
+        make_theme(
+            $is-light: true,
+            $section-bg-color: cColor.$primary-color-800,
+            $header-color: cColor.$base-color-100,
+            $text-color: cColor.$base-color-100,
+            $button-color: cColor.$primary-color-900,
+            $button-bg-color: cColor.$base-color-700,
+            $button-border-color: cColor.$base-color-500,
+            $input-color: cColor.$base-color-100,
+            $input-bg-color: cColor.$primary-color-800,
+            $input-border-color: cColor.$base-color-100,
+        ),
+    'dark':
+        make_theme(
+            $is-light: false,
+            $section-bg-color: cColor.$base-color-400,
+            $header-color: cColor.$primary-color-800,
+            $text-color: cColor.$primary-color-800,
+            $button-color: cColor.$base-color-100,
+            $button-bg-color: cColor.$secondary-color-900,
+            $button-border-color: cColor.$secondary-color-700,
+            $input-color: cColor.$base-color-100,
+            $input-bg-color: cColor.$primary-color-800,
+            $input-border-color: cColor.$base-color-900,
+        ),
+    'highlight-a':
+        make_theme(
+            $is-light: false,
+            $section-bg-color: cColor.$highlight-color-a-400,
+            $header-color: cColor.$base-color-100,
+            $text-color: cColor.$base-color-100,
+            $button-color: cColor.$primary-color-900,
+            $button-bg-color: cColor.$base-color-700,
+            $button-border-color: cColor.$base-color-500,
+            $input-color: cColor.$base-color-100,
+            $input-bg-color: cColor.$primary-color-800,
+            $input-border-color: cColor.$base-color-300,
+        ),
+    'highlight-b':
+        make_theme(
+            $is-light: false,
+            $section-bg-color: cColor.$highlight-color-b-400,
+            $header-color: cColor.$base-color-100,
+            $text-color: cColor.$base-color-100,
+            $button-color: cColor.$primary-color-900,
+            $button-bg-color: cColor.$base-color-700,
+            $button-border-color: cColor.$base-color-500,
+            $input-color: cColor.$base-color-100,
+            $input-bg-color: cColor.$primary-color-800,
+            $input-border-color: cColor.$base-color-300,
+        ),
+    'highlight-c':
+        make_theme(
+            $is-light: false,
+            $section-bg-color: cColor.$highlight-color-c-600,
+            $header-color: cColor.$base-color-100,
+            $text-color: cColor.$base-color-100,
+            $button-color: cColor.$primary-color-900,
+            $button-bg-color: cColor.$base-color-700,
+            $button-border-color: cColor.$base-color-500,
+            $input-color: cColor.$base-color-100,
+            $input-bg-color: cColor.$primary-color-800,
+            $input-border-color: cColor.$base-color-300,
+        ),
+);
+
+$all-theme-colors: map.set(
+    $all-theme-colors,
+    'default',
+    map-get($all-theme-colors, 'light')
+);
+
+$all-theme-colors-str: mapUtil.to-json-str($all-theme-colors);
+
+:export {
+    themes: $themes;
+    allThemeColors: $all-theme-colors-str;
+}

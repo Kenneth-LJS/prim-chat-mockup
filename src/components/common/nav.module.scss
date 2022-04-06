@@ -1,0 +1,398 @@
+@use 'sass:color';
+@use '../../styles/constants/typography.module.scss' as cTypo;
+@use '../../styles/constants/color.module.scss' as cColor;
+@use '../../styles/constants/layout.module.scss' as cLayout;
+@use '../../styles/mixins/layout.module.scss' as layout;
+@use '../../styles/components/nav.module.scss' as styles;
+
+.navPlaceholder {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        @if styles.$is-nav-transparent {
+            display: none;
+        } @else {
+            background-color: color.change(styles.$nav-mobile-background-color, $alpha: 1);
+            height: styles.$nav-desktop-height;
+        }
+    }
+
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        @if styles.$is-nav-transparent {
+            display: none;
+        } @else {
+            background-color: color.change(styles.$nav-desktop-background-color, $alpha: 1);
+            height: styles.$nav-desktop-height;
+        }
+    }
+}
+
+.navContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        display: flex;
+        justify-content: center;
+    
+        @include styles.nav-mobile-background;
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: flex;
+        justify-content: center;
+
+        padding-left: styles.$nav-desktop-padding-left;
+        padding-right: styles.$nav-desktop-padding-right;
+    
+        @include styles.nav-desktop-background;
+    }
+}
+
+.nav {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        position: relative;
+        @include styles.nav-mobile;
+    }
+
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        @include styles.nav-desktop;
+    }
+}
+
+.navBrandContainer {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        width: 100%;
+        height: 100%;
+        padding-left: styles.$nav-mobile-padding-left;
+        padding-right: styles.$nav-mobile-padding-right;
+
+        z-index: 1;
+
+        @include styles.nav-mobile-brand-container;
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        height: 100%;
+        padding-top: styles.$nav-desktop-padding-top;
+        padding-bottom: styles.$nav-desktop-padding-bottom;
+
+        @include styles.nav-desktop-brand-container;  
+    }
+}
+
+.navBrandLink {
+    display: block;
+
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        @include styles.nav-mobile-brand-link;
+        &:focus {
+            @include styles.nav-mobile-brand-link-focus;
+        }
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        @include styles.nav-desktop-brand-link;
+        &:focus {
+            @include styles.nav-desktop-brand-link-focus;
+        }   
+    }
+}
+
+.navBrandImg {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        height: styles.$nav-mobile-height * 0.8;
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        height: 100%;
+    }
+}
+
+.navBrandText {
+    // text-specific adjustments
+    font-family: cTypo.$title-ff;
+    font-weight: cTypo.$title-fw;
+    font-size: 32px;
+    color: cColor.$primary-color;
+    line-height: 1.2;
+}
+
+.navLinks {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        max-height: calc(100vh - #{styles.$nav-mobile-height});
+        overflow-y: auto;
+        
+        display: flex;
+        flex-direction: column;
+        gap: styles.$nav-mobile-links-gap;
+
+        @if styles.$is-nav-transparent {
+            transform: translateY(-1 * styles.$nav-mobile-height);
+        } @else {
+            transform: none;
+        }
+        pointer-events: none;
+        transition: transform styles.$nav-toggle-mobile-links-transition-duration;
+        .nav:focus-within & {
+            transform: translateY(100%);
+            pointer-events: auto;
+        }
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: flex;
+        gap: styles.$nav-desktop-links-gap;
+    }
+}
+
+.navLinkContainer {
+    position: relative;
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    &:not([href]) {
+        cursor: default;
+    }
+
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        @include styles.nav-mobile-link;
+
+        .navLinkContainer:focus-within &,
+        &:focus {
+            @include styles.nav-mobile-link-focus;
+        }
+    
+        &:hover {
+            @include styles.nav-mobile-link-hover;
+        }
+    
+        &.active {
+            @include styles.nav-mobile-link-active;
+            cursor: default;
+        }
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        @include styles.nav-desktop-link;
+
+        .navLinkContainer:focus-within &,
+        &:focus {
+            @include styles.nav-desktop-link-focus;
+        }
+    
+        &:hover {
+            @include styles.nav-desktop-link-hover;
+        }
+    
+        &.active {
+            @include styles.nav-desktop-link-active;
+            cursor: default;
+        }
+    }
+}
+
+.navSubLinksPositioning {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+    
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: max-content;
+
+        padding-top: styles.$nav-desktop-sublinks-container-gap;
+        
+        display: none;
+        .navLinkContainer:hover &,
+        .navLinkContainer:focus-within & {
+            display: block;
+        }
+    }
+}
+
+.navSubLinksContainer {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+    
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        border-bottom-left-radius: styles.$nav-desktop-sublinks-border-radius;
+        border-bottom-right-radius: styles.$nav-desktop-sublinks-border-radius;
+        overflow: hidden;
+    }
+}
+
+.navSubLinks {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        display: flex;
+        flex-direction: column;
+        gap: styles.$nav-mobile-sublinks-gap;
+
+        @include styles.nav-mobile-sublinks-background;
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: flex;
+        flex-direction: column;
+
+        @include styles.nav-desktop-sublinks-background;
+    }
+}
+
+.navSubLink {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        @include styles.nav-mobile-sublink;
+    
+        &:focus {
+            @include styles.nav-mobile-sublink-focus;
+        }
+    
+        &:hover {
+            @include styles.nav-mobile-sublink-hover;
+        }
+    
+        &.active {
+            @include styles.nav-mobile-sublink-active;
+            cursor: default;
+        }
+    }
+    
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: flex;
+        align-items: center;
+        
+        @include styles.nav-desktop-sublink;
+    
+        &:focus {
+            @include styles.nav-desktop-sublink-focus;
+        }
+    
+        &:hover {
+            @include styles.nav-desktop-sublink-hover;
+        }
+    
+        &.active {
+            @include styles.nav-desktop-sublink-active;
+            cursor: default;
+        }
+    }
+}
+
+.navMobileToggle {
+
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        z-index: 2;
+
+        @include styles.nav-toggle-position;
+
+        cursor: pointer;
+        border: styles.$nav-toggle-button-border;
+        border-radius: styles.$nav-toggle-button-border-radius;
+
+        &:focus {
+            pointer-events: none;
+        }
+
+        .navMobileToggleBar1,
+        .navMobileToggleBar2,
+        .navMobileToggleBar3 {
+            display: inline-block;
+            position: absolute;
+            width: styles.$nav-toggle-button-bar-width;
+            height: styles.$nav-toggle-button-bar-height;
+            left: styles.$nav-toggle-button-bar-width * styles.$nav-toggle-button-center-x * -1;
+            top: styles.$nav-toggle-button-bar-height * styles.$nav-toggle-button-center-y * -1;
+
+            pointer-events: none;
+            background-color: styles.$nav-toggle-button-color;
+
+            transform-origin: center;
+
+            transition:
+                transform styles.$nav-toggle-button-transition-duration,
+                opacity styles.$nav-toggle-button-transition-duration;
+        }
+
+        .navMobileToggleBar1 {
+            transform: translate(
+                styles.$nav-toggle-button-size * 0.5,
+                styles.$nav-toggle-button-size * 0.3
+            );
+        }
+
+        .navMobileToggleBar2 {
+            transform: translate(
+                styles.$nav-toggle-button-size * 0.5,
+                styles.$nav-toggle-button-size * 0.5
+            );
+        }
+
+        .navMobileToggleBar3 {
+            transform: translate(
+                styles.$nav-toggle-button-size * 0.5,
+                styles.$nav-toggle-button-size * 0.7
+            );
+        }
+
+        .nav:focus-within & {
+            .navMobileToggleBar1 {
+                transform: translate(
+                    styles.$nav-toggle-button-size * 0.5,
+                    styles.$nav-toggle-button-size * 0.5
+                ) rotate(45deg);
+            }
+        
+            .navMobileToggleBar2 {
+                opacity: 0;
+            }
+        
+            .navMobileToggleBar3 {
+                transform: translate(
+                    styles.$nav-toggle-button-size * 0.5,
+                    styles.$nav-toggle-button-size * 0.5
+                ) rotate(-45deg);
+            }
+        }
+    }
+
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: none;
+    }
+}
+
+.navMobileToggleActiveBlock {
+    @media (max-width: styles.$nav-mobile-width-threshold) {
+        z-index: 3;
+
+        @include styles.nav-toggle-position;
+
+        cursor: pointer;
+        display: none;
+
+        .nav:focus-within & {
+            display: block;
+        }
+    }
+
+    @media (min-width: styles.$nav-desktop-width-threshold) {
+        display: none;
+    }
+}
+
+:export {
+    navDesktopWidthThresholdPx: styles.$nav-desktop-width-threshold-px;
+    pageXPaddingPx: cLayout.$page-x-padding-px;
+}

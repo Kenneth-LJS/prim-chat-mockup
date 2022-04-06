@@ -1,0 +1,13 @@
+@use '../constants/color.module.scss' as cColor;
+@use '../mixins/selection.module.scss' as selection;
+
+#__next-prerender-indicator {
+    display: none;
+}
+
+body {
+    overflow: auto;
+    background-color: cColor.$background-color;
+}
+
+@include selection.selectable();

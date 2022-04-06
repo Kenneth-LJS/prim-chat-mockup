@@ -1,0 +1,6 @@
+@function if($condition, $expr-if-true, $expr-if-false) {
+    @if $condition {
+        @return $expr-if-true;
+    }
+    @return $expr-if-false;
+}

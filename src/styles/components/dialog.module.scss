@@ -1,0 +1,26 @@
+@use '../constants/layout.module.scss' as cLayout;
+
+$dialog-screen-overlay-color: rgba(0, 0, 0, 0.4);
+$dialog-border-radius: 5px;
+$dialog-filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.4));
+$dialog-close-button-padding: 10px;
+$dialog-close-button-image-size: 12px;
+
+@mixin dialog-container {
+    background-color: $dialog-screen-overlay-color;
+}
+
+@mixin dialog {
+    border-radius: $dialog-border-radius;
+    filter: $dialog-filter;
+
+    padding: cLayout.$dialog-y-padding cLayout.$dialog-x-padding;
+}
+
+@mixin dialog-close-button {
+    padding: $dialog-close-button-padding;
+}
+
+@mixin dialog-close-button-image {
+    width: $dialog-close-button-image-size;
+}

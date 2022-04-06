@@ -1,0 +1,46 @@
+@function validate-map($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+        $map: map-get($map, $key);
+    }
+    @return true;
+}
+
+@function get-map-value($map, $keys...) {
+    @each $key in $keys {
+        @if (validate-map($map, $key)) {
+            $map: map-get($map, $key);
+        }
+        @else {
+            @error "The key #{$key} does not exist in that map.";
+        }
+    }
+    @return $map;
+}
+
+@mixin apply-styles($style-map) {
+    @each $property, $value in $style-map {
+        #{$property}: $value;
+    }
+}
+
+@function to-json-str($obj) {
+    @if type-of($obj) != 'map' {
+        @return '"#{$obj}"';
+    }
+
+    $out: '{';
+    $is-first-elem: true;
+    @each $property, $value in $obj {
+        @if not $is-first-elem {
+            $out: '#{$out},';
+        } @else {
+            $is-first-elem: false;
+        }
+        $out: '#{$out}"#{$property}":#{to-json-str($value)}';
+    }
+    $out: '#{$out}}';
+    @return $out;
+}

@@ -1,0 +1,13 @@
+@use '../constants/color.module.scss' as cColor;
+
+@mixin selectable(
+    $background-color: cColor.$selection-color,
+    $background-opacity: 0.7,
+) {
+    ::selection {
+        background: rgba($background-color, $background-opacity); /* WebKit/Blink Browsers */
+    }
+    ::-moz-selection {
+        background: rgba($background-color, $background-opacity); /* Gecko Browsers */
+    }
+}

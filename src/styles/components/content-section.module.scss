@@ -1,0 +1,13 @@
+@use '../constants/layout.module.scss' as cLayout;
+
+$content-section-box-border-radius: 6px;
+
+@mixin content-section {
+
+}
+
+@mixin content-section-box {
+    @if cLayout.$content-has-container {
+        border-radius: $content-section-box-border-radius;
+    }
+}

@@ -1,0 +1,32 @@
+@use '../../styles/mixins/typography.module.scss' as typo;
+
+.title {
+    @include typo.titleText;
+}
+
+.header1 {
+    @include typo.header1Text;
+}
+
+.body {
+    @include typo.bodyText;
+}
+
+.elemSection {
+    margin-top: 50px;
+}
+
+.elemGroup {
+    display: flex;
+    gap: 20px;
+
+    align-items: flex-start;
+}
+
+.elemGroupHeader {
+    @include typo.header3Text($has-margin: false);
+}
+
+.selectElemSize {
+    width: 400px;
+}

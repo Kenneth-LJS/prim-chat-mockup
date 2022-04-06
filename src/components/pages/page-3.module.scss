@@ -1,0 +1,16 @@
+@use '../../styles/constants/color.module.scss' as cColor;
+@use '../../styles/mixins/typography.module.scss' as typo;
+
+.title {
+    @include typo.titleText;
+    color: cColor.$primary-color;
+}
+
+.header {
+    @include typo.header1Text;
+}
+
+.body {
+    @include typo.bodyContainer;
+    @include typo.bodyText;
+}

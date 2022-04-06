@@ -1,0 +1,13 @@
+node_modules
+.parcel-cache
+dist-local
+dist-website
+src-local/node_modules
+src-local/pages
+src-local/dist
+src-website/.next
+src-website/out
+src-website/public
+src-website/node_modules
+src-website/pages/**/*.tsx
+!src-website/pages/_app.tsx

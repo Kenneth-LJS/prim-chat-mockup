@@ -1,0 +1,434 @@
+@use 'sass:color';
+@use 'sass:math';
+@use '../constants/layout.module.scss' as cLayout;
+@use '../constants/color.module.scss' as cColor;
+@use '../constants/typography.module.scss' as cTypo;
+@use '../mixins/layout.module.scss' as layout;
+
+$is-nav-transparent: false;
+$nav-desktop-width-threshold-px: 800;
+$nav-desktop-width-threshold: #{$nav-desktop-width-threshold-px}px;
+$nav-mobile-width-threshold: #{$nav-desktop-width-threshold-px - 1}px;
+
+// ===== Colors =====
+
+$nav-color: cColor.$base-color-400;
+$nav-color-darker: cColor.$base-color-200;
+$nav-hover-color: cColor.$primary-color-700;
+$text-color: cColor.$primary-color;
+$text-hover-color: cColor.$base-color-400;
+$hover-glow-color: transparent;
+
+$nav-desktop-background-color: $nav-color;
+$nav-desktop-sublinks-background-color: $nav-color;
+
+$nav-desktop-link-color: $text-color;
+$nav-desktop-link-background-color: transparent;
+$nav-desktop-link-glow-color: transparent;
+$nav-desktop-link-hover-color: $text-hover-color;
+$nav-desktop-link-hover-background-color: $nav-hover-color;
+$nav-desktop-link-hover-glow-color: $hover-glow-color;
+$nav-desktop-sublink-color: $text-color;
+$nav-desktop-sublink-background-color: $nav-color;
+$nav-desktop-sublink-glow-color: transparent;
+$nav-desktop-sublink-hover-color: $text-hover-color;
+$nav-desktop-sublink-hover-background-color: $nav-hover-color;
+$nav-desktop-sublink-hover-glow-color: $hover-glow-color;
+
+$nav-mobile-link-color: $text-color;
+$nav-mobile-link-background-color: $nav-color;
+$nav-mobile-link-glow-color: transparent;
+$nav-mobile-link-hover-color: $text-hover-color;
+$nav-mobile-link-hover-background-color: $nav-hover-color;
+$nav-mobile-link-hover-glow-color: $hover-glow-color;
+$nav-mobile-sublink-color: $text-color;
+$nav-mobile-sublink-background-color: $nav-color;
+$nav-mobile-sublink-glow-color: transparent;
+$nav-mobile-sublink-hover-color: $text-hover-color;
+$nav-mobile-sublink-hover-background-color: $nav-hover-color;
+$nav-mobile-sublink-hover-glow-color: $hover-glow-color;
+
+$nav-desktop-brand-link-focus-outline-color: $text-color;
+$nav-mobile-brand-link-focus-outline-color: $text-color;
+
+$nav-desktop-sublink-separator-border-color: $nav-color-darker;
+$nav-mobile-link-separator-border-color: $nav-color-darker;
+
+$nav-mobile-background-color: $nav-color;
+$nav-mobile-sublinks-background-color: transparent;
+
+$nav-toggle-button-color: $text-color;
+$nav-toggle-button-border-color: $text-color;
+
+// ===== Desktop Sizing =====
+
+$nav-desktop-height: 60px;
+$nav-desktop-padding-top: 10px;
+$nav-desktop-padding-bottom: 10px;
+$nav-desktop-padding-left: cLayout.$page-x-padding;
+$nav-desktop-padding-right: cLayout.$page-x-padding;
+
+$nav-desktop-brand-links-gap: 10px;
+$nav-desktop-links-gap: 1px;
+$nav-desktop-link-padding-left: 16px;
+$nav-desktop-link-padding-right: 16px;
+$nav-desktop-link-glow-size: 10px;
+$nav-desktop-link-hover-glow-size: 10px;
+
+$nav-desktop-sublinks-container-gap: 0px;
+$nav-desktop-sublinks-gap: 1px;
+$nav-desktop-sublink-height: 50px;
+$nav-desktop-sublink-padding-left: $nav-desktop-link-padding-left;
+$nav-desktop-sublink-padding-right: $nav-desktop-link-padding-right;
+$nav-desktop-sublink-glow-size: 10px;
+$nav-desktop-sublink-hover-glow-size: 10px;
+
+// $nav-desktop-sublink-separator-border: 1px solid cColor.$base-color-200;
+$nav-desktop-sublink-separator-border: none;
+
+$nav-desktop-sublinks-border-radius: 4px;
+
+// ===== Mobile sizing =====
+
+$nav-mobile-height: 60px;
+$nav-mobile-padding-top: 10px;
+$nav-mobile-padding-bottom: 10px;
+$nav-mobile-padding-left: cLayout.$page-x-padding;
+$nav-mobile-padding-right: cLayout.$page-x-padding;
+
+$nav-mobile-links-gap: 0px;
+$nav-mobile-link-padding-top: 10px;
+$nav-mobile-link-padding-bottom: 10px;
+$nav-mobile-link-padding-left: 16px;
+$nav-mobile-link-padding-right: 16px;
+$nav-mobile-link-glow-size: 0;
+$nav-mobile-link-hover-glow-size: 10px;
+
+$nav-mobile-sublinks-gap: 0px;
+$nav-mobile-sublink-height: 50px;
+$nav-mobile-sublink-padding-top: $nav-mobile-link-padding-top;
+$nav-mobile-sublink-padding-bottom: $nav-mobile-link-padding-bottom;
+$nav-mobile-sublink-padding-left: $nav-mobile-link-padding-left + 30px;
+$nav-mobile-sublink-padding-right: $nav-mobile-link-padding-right;
+$nav-mobile-sublink-glow-size: 0;
+$nav-mobile-sublink-hover-glow-size: 10px;
+
+$nav-mobile-link-separator-border: 1px solid $nav-mobile-link-separator-border-color;
+$nav-mobile-sublink-separator-border: 1px solid $nav-mobile-link-separator-border-color;
+
+// ===== Typography =====
+
+$nav-link-font-family: cTypo.$title-ff;
+$nav-link-font-weight: cTypo.$title-fw;
+$nav-link-letter-spacing: cTypo.$title-ls;
+$nav-link-text-transform: cTypo.$title-tt;
+
+$nav-sublink-font-family: cTypo.$title-ff;
+$nav-sublink-font-weight: cTypo.$title-fw;
+$nav-sublink-letter-spacing: cTypo.$title-ls;
+$nav-sublink-text-transform: cTypo.$title-tt;
+
+$nav-desktop-link-font-size: 24px;
+$nav-desktop-sublink-font-size: 24px;
+
+$nav-mobile-link-font-size: 24px;
+$nav-mobile-sublink-font-size: 20px;
+
+// ===== Navbar Shadow =====
+
+$nav-desktop-shadow-height: 10px;
+$nav-desktop-shadow-color: rgba(0, 0, 0, 0.2);
+$nav-mobile-shadow-height: 10px;
+$nav-mobile-shadow-color: rgba(0, 0, 0, 0.2);
+
+// ===== Navbar Mobile Toggle =====
+
+$nav-toggle-button-size: 50px;
+$nav-toggle-button-color: $nav-toggle-button-color;
+$nav-toggle-button-margin: math.div($nav-mobile-height - $nav-toggle-button-size, 2);
+
+$nav-toggle-button-bar-width: $nav-toggle-button-size * 0.75;
+$nav-toggle-button-bar-height: $nav-toggle-button-size * 0.10;
+$nav-toggle-button-center-x: 0.50; // should be 0.5 but we tweak this to align better
+$nav-toggle-button-center-y: 0.50; // should be 0.5 but we tweak this to align better
+$nav-toggle-button-border: 1px solid $nav-toggle-button-border-color;
+$nav-toggle-button-border-radius: 3px;
+
+$nav-toggle-button-transition-duration: 0.2s;
+$nav-toggle-mobile-links-transition-duration: 0.2s;
+
+// ===== Mixins: Nav =====
+
+@mixin nav-desktop {
+    @include layout.content-width();
+    height: $nav-desktop-height;
+
+    display: flex;
+    justify-content: space-between;
+    gap: $nav-desktop-brand-links-gap;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: $nav-desktop-shadow-height;
+        background: linear-gradient($nav-desktop-shadow-color, transparent);
+        pointer-events: none;
+    }
+}
+
+@mixin nav-desktop-background {
+    background-color: $nav-desktop-background-color;
+}
+
+@mixin nav-desktop-sublinks-background {
+
+}
+
+@mixin nav-desktop-brand-container {
+
+}
+
+@mixin nav-desktop-brand-link {
+
+}
+
+@mixin nav-mobile {
+    width: 100%;
+    height: $nav-mobile-height;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: $nav-mobile-shadow-height;
+        background: linear-gradient($nav-mobile-shadow-color, transparent);
+        pointer-events: none;
+    }
+}
+
+@mixin nav-mobile-background {
+    background-color: $nav-mobile-background-color;
+}
+
+@mixin nav-mobile-sublinks-background {
+    background-color: $nav-mobile-sublinks-background-color;
+}
+
+@mixin nav-mobile-brand-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include nav-mobile-background;
+}
+
+@mixin nav-mobile-brand-link {
+    
+}
+
+// ===== Mixins: Links =====
+
+@mixin nav-desktop-brand-link-focus {
+    outline: 1px solid $nav-desktop-brand-link-focus-outline-color;
+}
+
+@mixin nav-desktop-link {
+    font-family: $nav-link-font-family;
+    font-weight: $nav-link-font-weight;
+    letter-spacing: $nav-link-letter-spacing;
+    text-transform: $nav-link-text-transform;
+    font-size: $nav-desktop-link-font-size;
+    color: $nav-desktop-link-color;
+    background-color: $nav-desktop-link-background-color;
+
+    padding: $nav-desktop-padding-top $nav-desktop-link-padding-right
+        $nav-desktop-padding-bottom $nav-desktop-link-padding-left;
+
+    box-shadow: inset 0 0 $nav-desktop-link-glow-size $nav-desktop-link-glow-color;
+
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+@mixin nav-desktop-link-focus {
+    color: $nav-desktop-link-hover-color;
+    background-color: $nav-desktop-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-link-hover-glow-size $nav-desktop-link-hover-glow-color;
+
+    outline: none;
+}
+
+@mixin nav-desktop-link-hover {
+    color: $nav-desktop-link-hover-color;
+    background-color: $nav-desktop-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-link-hover-glow-size $nav-desktop-link-hover-glow-color;
+}
+
+@mixin nav-desktop-link-active {
+    color: $nav-desktop-link-hover-color;
+    background-color: $nav-desktop-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-link-hover-glow-size $nav-desktop-link-hover-glow-color;
+}
+
+@mixin nav-desktop-sublink {
+    height: $nav-desktop-sublink-height;
+
+    font-family: $nav-sublink-font-family;
+    font-weight: $nav-sublink-font-weight;
+    letter-spacing: $nav-sublink-letter-spacing;
+    text-transform: $nav-sublink-text-transform;
+    font-size: $nav-desktop-sublink-font-size;
+    color: $nav-desktop-sublink-color;
+    background-color: $nav-desktop-sublink-background-color;
+
+    border-top: $nav-desktop-sublink-separator-border;
+
+    padding: $nav-desktop-padding-top $nav-desktop-sublink-padding-right
+        $nav-desktop-padding-bottom $nav-desktop-sublink-padding-left;
+
+    box-shadow: inset 0 0 $nav-desktop-sublink-glow-size $nav-desktop-sublink-glow-color;
+
+    transition: color 0.2s, background-color 0.2s;
+}
+
+@mixin nav-desktop-sublink-focus {
+    color: $nav-desktop-sublink-hover-color;
+    background-color: $nav-desktop-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-sublink-hover-glow-size $nav-desktop-sublink-hover-glow-color;
+
+    outline: none;
+}
+
+@mixin nav-desktop-sublink-hover {
+    color: $nav-desktop-sublink-hover-color;
+    background-color: $nav-desktop-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-sublink-hover-glow-size $nav-desktop-sublink-hover-glow-color;
+}
+
+@mixin nav-desktop-sublink-active {
+    color: $nav-desktop-sublink-hover-color;
+    background-color: $nav-desktop-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-desktop-sublink-hover-glow-size $nav-desktop-sublink-hover-glow-color;
+}
+
+@mixin nav-mobile-brand-link-focus {
+    outline: 1px solid $nav-mobile-brand-link-focus-outline-color;
+}
+
+@mixin nav-mobile-link {
+    font-family: $nav-link-font-family;
+    font-weight: $nav-link-font-weight;
+    letter-spacing: $nav-link-letter-spacing;
+    text-transform: $nav-link-text-transform;
+    font-size: $nav-mobile-link-font-size;
+    color: $nav-mobile-link-color;
+    background-color: $nav-mobile-link-background-color;
+
+    border-top: $nav-mobile-link-separator-border;
+
+    padding: $nav-mobile-link-padding-top $nav-mobile-link-padding-right
+        $nav-mobile-link-padding-bottom $nav-mobile-link-padding-left;
+
+    box-shadow: inset 0 0 $nav-mobile-link-glow-size $nav-mobile-link-glow-color;
+
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+@mixin nav-mobile-link-focus {
+    color: $nav-mobile-link-hover-color;
+    background-color: $nav-mobile-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-link-hover-glow-size $nav-mobile-link-hover-glow-color;
+
+    outline: none;
+}
+
+@mixin nav-mobile-link-hover {
+    color: $nav-mobile-link-hover-color;
+    background-color: $nav-mobile-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-link-hover-glow-size $nav-mobile-link-hover-glow-color;
+}
+
+@mixin nav-mobile-link-active {
+    color: $nav-mobile-link-hover-color;
+    background-color: $nav-mobile-link-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-link-hover-glow-size $nav-mobile-link-hover-glow-color;
+}
+
+@mixin nav-mobile-sublink {
+    font-family: $nav-sublink-font-family;
+    font-weight: $nav-sublink-font-weight;
+    letter-spacing: $nav-sublink-letter-spacing;
+    text-transform: $nav-sublink-text-transform;
+    font-size: $nav-mobile-sublink-font-size;
+    color: $nav-mobile-sublink-color;
+    background-color: $nav-mobile-sublink-background-color;
+
+    border-top: $nav-mobile-sublink-separator-border;
+
+    padding: $nav-mobile-sublink-padding-top $nav-mobile-sublink-padding-right
+        $nav-mobile-sublink-padding-bottom $nav-mobile-sublink-padding-left;
+
+        box-shadow: inset 0 0 $nav-mobile-sublink-glow-size $nav-mobile-sublink-glow-color;
+
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+@mixin nav-mobile-sublink-focus {
+    color: $nav-mobile-sublink-hover-color;
+    background-color: $nav-mobile-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-sublink-hover-glow-size $nav-mobile-sublink-hover-glow-color;
+
+    outline: none;
+}
+
+@mixin nav-mobile-sublink-hover {
+    color: $nav-mobile-sublink-hover-color;
+    background-color: $nav-mobile-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-sublink-hover-glow-size $nav-mobile-sublink-hover-glow-color;
+}
+
+@mixin nav-mobile-sublink-active {
+    color: $nav-mobile-sublink-hover-color;
+    background-color: $nav-mobile-sublink-hover-background-color;
+
+    box-shadow: inset 0 0 $nav-mobile-sublink-hover-glow-size $nav-mobile-sublink-hover-glow-color;
+}
+
+// ===== Mixins: Navbar Mobile Toggle =====
+
+@mixin nav-toggle-position {
+    position: absolute;
+
+    top: $nav-toggle-button-margin;
+    right: $nav-toggle-button-margin;
+    width: $nav-toggle-button-size;
+    height: $nav-toggle-button-size;
+}
+
+// ===== Export =====
+
+:export {
+    isNavTransparent: $is-nav-transparent;
+}

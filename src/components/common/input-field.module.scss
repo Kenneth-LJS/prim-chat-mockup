@@ -1,0 +1,15 @@
+@use '../../styles/variables.scss' as variables;
+@use '../../styles/mixins.scss' as mixins;
+
+.inputField {
+}
+
+.inputFieldLabel {
+    font-family: variables.$header-font;
+    font-size: 22px;
+    font-weight: 400;
+
+    color: variables.$input-color;
+
+    margin-bottom: 4px;
+}

@@ -1,0 +1,58 @@
+@use '../../styles/mixins/form-elements.module.scss' as feStyle;
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.input {
+    @include feStyle.input;
+    @include theme.apply-theme-styles('input');
+}
+
+// .input {
+//     @include mixins.textFont();
+//     @include mixins.roundedBorder();
+
+//     color: variables.$input-color;
+//     background-color: variables.$input-bg-color;
+
+//     padding: 13px 12px 11px 12px;
+// }
+
+// .input:disabled {
+//     color: variables.$input-disabled-color;
+//     background-color: variables.$input-disabled-bg-color;
+// }
+
+// .inputColor {
+//     display: inline-block;
+//     @include mixins.textFont();
+//     @include mixins.roundedBorder();
+    
+//     height: 53px;
+
+//     cursor: pointer;
+// }
+
+// .inputColorInput {
+//     visibility: hidden;
+// }
+
+// .inputFile {
+//     @include mixins.roundedBorder();
+
+//     width: 100%;
+
+//     display: inline-block;
+//     background-color: variables.$button-bg-color;
+//     color: variables.$button-color;
+//     padding: 6px 12px;
+//     cursor: pointer;
+
+//     transition: background-color 0.1s;
+    
+//     &:hover {
+//         background-color: variables.$button-hover-bg-color;
+//     }
+// }
+
+// .inputFileInput {
+//     visibility: hidden;
+// }

@@ -1,0 +1,49 @@
+// @use '../sass-utils/math.scss' as math;
+@use 'sass:math';
+
+// Font sizes
+$base-fs: 18px;
+$fs-100: calc($base-fs / math.pow(1.25, 3));   // 
+$fs-200: calc($base-fs / math.pow(1.25, 2));   // 
+$fs-300: calc($base-fs / math.pow(1.25, 1));   // 
+$fs-400: $base-fs;                             // Body / h6
+$fs-450: calc($base-fs * math.pow(1.25, 1));   // h5
+$fs-500: calc($base-fs * math.pow(1.25, 2));   // h4
+$fs-550: calc($base-fs * math.pow(1.25, 3));   // h3
+$fs-600: calc($base-fs * math.pow(1.25, 4));   // h2
+$fs-650: calc($base-fs * math.pow(1.25, 5));   // h1
+$fs-700: calc($base-fs * math.pow(1.25, 6));   // Subtitle
+$fs-750: calc($base-fs * math.pow(1.25, 7));   // Title
+
+// Font families
+$title-ff: 'Rubik', sans-serif; 
+$header-ff: 'Rubik', sans-serif; 
+$body-ff: 'Rubik', sans-serif; 
+
+// Font weights
+$title-fw: 800;
+$header-fw: 800;
+$body-fw: 400;
+
+// Letter spacing
+$title-ls: normal;
+$header-ls: normal;
+$body-ls: normal;
+
+// Text transform
+$title-tt: none;
+$header-tt: none;
+$body-tt: none;
+
+// Line height
+$title-lh: 1.2;
+$header-lh: 1.2;
+$body-lh: 1.5;
+
+// Header margins
+$title-margin: 16px;
+$header-margin: 16px;
+$body-margin: 32px;
+
+// Paragraph spacing
+$paragraph-spacing: 1em;

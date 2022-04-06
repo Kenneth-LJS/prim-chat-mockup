@@ -1,0 +1,26 @@
+@use '../../styles/components/banner.module.scss' as styles;
+
+.banner {
+    position: relative;
+
+    height: styles.$banner-height;
+}
+
+.bannerContent {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bannerBackground {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+}

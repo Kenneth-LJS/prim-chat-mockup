@@ -1,0 +1,8 @@
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+$header-levels: 'title', 'subtitle', 'header-1', 'header-2', 'header-3', 'header-4', 'header-5', 'header-6';
+@each $header-level in $header-levels {
+    .#{$header-level} {
+        @include theme.apply-theme-styles($header-level);
+    }
+}

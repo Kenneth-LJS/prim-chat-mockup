@@ -1,0 +1,9 @@
+@use '../../styles/constants/color.module.scss' as cColor;
+@use '../../styles/mixins/selection.module.scss' as selection;
+
+.container {
+    background-color: cColor.$background-color;
+    color: cColor.$text-color;
+    padding: clamp(20px, 4vh, 60px) clamp(20px, 3vw, 40px);
+    min-height: 100vh;
+}

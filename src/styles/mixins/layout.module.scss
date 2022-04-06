@@ -1,0 +1,44 @@
+@use '../constants/layout.module.scss' as cLayout;
+
+@mixin content-width {
+    width: 100%;
+    max-width: cLayout.$content-width;
+}
+
+@mixin sections-container {
+    // A container for multiple section children
+
+    & > * + * {
+        margin-top: cLayout.$section-gap;
+    }
+}
+
+@mixin section-padding {
+    @include section-x-padding;
+    @include section-y-padding;
+}
+
+@mixin section-x-padding {
+    padding-left: cLayout.$page-x-padding;
+    padding-right: cLayout.$page-x-padding;
+}
+
+@mixin section-y-padding {
+    padding-top: cLayout.$section-y-padding;
+    padding-bottom: cLayout.$section-y-padding;
+}
+
+@mixin content-padding {
+    @include content-x-padding;
+    @include content-y-padding;
+}
+
+@mixin content-x-padding {
+    padding-left: cLayout.$content-x-padding;
+    padding-right: cLayout.$content-x-padding;
+}
+
+@mixin content-y-padding {
+    padding-top: cLayout.$content-y-padding;
+    padding-bottom: cLayout.$content-y-padding;
+}

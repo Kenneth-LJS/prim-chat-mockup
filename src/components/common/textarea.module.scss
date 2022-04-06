@@ -1,0 +1,7 @@
+@use '../../styles/mixins/form-elements.module.scss' as feStyle;
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.textarea {
+    @include feStyle.textarea;
+    @include theme.apply-theme-styles('textarea');
+}

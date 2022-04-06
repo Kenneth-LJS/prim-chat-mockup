@@ -1,0 +1,9 @@
+@use '../../styles/mixins/form-elements.module.scss' as feStyle;
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.button {
+    display: inline-block;
+
+    @include feStyle.button;
+    @include theme.apply-theme-styles('button');
+}

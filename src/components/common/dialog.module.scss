@@ -1,0 +1,47 @@
+@use '../../styles/components/dialog.module.scss' as styles;
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.dialogContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include styles.dialog-container();
+}
+
+.dialog {
+    width: 500px;
+    height: 500px;
+    position: relative;
+
+    height: fit-content;
+
+    @include styles.dialog();
+    @include theme.apply-theme-styles('dialog');
+}
+
+.dialogCloseButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    line-height: 0;
+
+    @include styles.dialog-close-button();
+}
+
+.dialogCloseButtonImage {
+    aspect-ratio: 1;
+
+    @include styles.dialog-close-button-image();
+    @include theme.apply-theme-styles('dialog-close-button-image');
+}

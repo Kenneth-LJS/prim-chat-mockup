@@ -1,0 +1,7 @@
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.textarea {
+    text-decoration: underline;
+    
+    @include theme.apply-theme-styles('link');
+}

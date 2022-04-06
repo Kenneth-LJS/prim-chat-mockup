@@ -1,0 +1,32 @@
+@use '../constants/layout.module.scss' as cLayout;
+@use '../constants/color.module.scss' as cColor;
+@use '../mixins/layout.module.scss' as layout;
+@use '../mixins/typography.module.scss' as typo;
+
+$footer-padding-top: 30px;
+$footer-padding-bottom: 30px;
+$footer-padding-left: cLayout.$page-x-padding;
+$footer-padding-right: cLayout.$page-x-padding;
+
+@mixin footer-x-padding {
+    padding-left: $footer-padding-left;
+    padding-right: $footer-padding-right;
+}
+
+@mixin footer-y-padding {
+    padding-top: $footer-padding-top;
+    padding-bottom: $footer-padding-bottom;
+}
+
+@mixin footer-background {
+    background-color: cColor.$base-color;
+}
+
+@mixin footer-content-width {
+    @include layout.content-width;
+}
+
+@mixin footer-text {
+    @include typo.bodyText;
+    color: cColor.$primary-color-800;
+}

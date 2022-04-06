@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use 'sass:string';
+@use '../sass-utils/map-util.scss' as mapUtil;
+@use '../constants/theme.module.scss' as cTheme;
+
+$modifiers: '', ':hover', ':disabled';
+
+@mixin apply-theme-styles($elem) {
+    @each $theme in cTheme.$themes {
+        @if map-has-key(cTheme.$all-theme-colors, $theme) {
+            $theme-colors: map-get(cTheme.$all-theme-colors, $theme);
+            @if $theme == 'default' {
+                @each $modifier in $modifiers {
+                    $key: #{$elem} + #{$modifier};
+                    @if map-has-key($theme-colors, $key) {
+                        $style-map: map-get($theme-colors, $key);
+
+                        &#{$modifier} {
+                            @include mapUtil.apply-styles($style-map);
+                        }
+                    }
+                }
+            } @else {
+                &.theme__#{$theme} {
+                    @each $modifier in $modifiers {
+                        $key: #{$elem} + #{$modifier};
+                        @if map-has-key($theme-colors, $key) {
+                            $style-map: map-get($theme-colors, $key);
+                            &#{$modifier} {
+                                @include mapUtil.apply-styles($style-map);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

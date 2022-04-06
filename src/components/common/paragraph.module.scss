@@ -1,0 +1,5 @@
+@use '../../styles/mixins/theme.module.scss' as theme;
+
+.paragraph {
+    @include theme.apply-theme-styles('body');
+}

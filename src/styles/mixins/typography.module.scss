@@ -1,0 +1,161 @@
+@use '../constants/typography.module.scss' as cTypo;
+
+@mixin titleFont {
+    font-family: cTypo.$title-ff;
+    font-weight: cTypo.$title-fw;
+    letter-spacing: cTypo.$title-ls;
+    text-transform: cTypo.$title-tt;
+}
+
+@mixin headerFont {
+    font-family: cTypo.$header-ff;
+    font-weight: cTypo.$header-fw;
+    letter-spacing: cTypo.$header-ls;
+    text-transform: cTypo.$header-tt;
+}
+
+@mixin bodyFont {
+    font-family: cTypo.$body-ff;
+    font-weight: cTypo.$body-fw;
+    letter-spacing: cTypo.$body-ls;
+    text-transform: cTypo.$body-tt;
+}
+
+@mixin titleText($has-margin: true) {
+    font-size: cTypo.$fs-600;
+
+    @include titleFont;
+    line-height: cTypo.$title-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$title-margin;
+        }
+    }
+}
+
+@mixin subtitleText($has-margin: true) {
+    font-size: cTypo.$fs-550;
+
+    @include titleFont;
+    line-height: cTypo.$title-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$title-margin;
+        }
+    }
+}
+
+@mixin header1Text($has-margin: true) {
+    font-size: cTypo.$fs-550;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin header2Text($has-margin: true) {
+    font-size: cTypo.$fs-500;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin header3Text($has-margin: true) {
+    font-size: cTypo.$fs-450;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin header4Text($has-margin: true) {
+    font-size: cTypo.$fs-450;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin header5Text($has-margin: true) {
+    font-size: cTypo.$fs-450;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin header6Text($has-margin: true) {
+    font-size: cTypo.$fs-400;
+    
+    @include headerFont;
+    line-height: cTypo.$header-lh;
+
+    @if $has-margin == true {
+        &:not(:last-child) {
+            margin-bottom: cTypo.$header-margin;
+        }
+    }
+}
+
+@mixin bodyContainer {
+    & > * + * {
+        margin-top: cTypo.$paragraph-spacing;
+    }
+}
+
+@mixin bodyText {
+    font-size: cTypo.$fs-400;
+    
+    @include bodyFont;
+    line-height: cTypo.$body-lh;
+    text-transform: none
+}
+
+@mixin bodyParagraphText {
+    @include bodyText;
+
+    &:not(:last-child) {
+        margin-bottom: cTypo.$body-margin;
+    }
+}
+
+@mixin body {
+    // used for bodies with paragraphs
+
+    p {
+        @include bodyParagraphText;
+    }
+
+    p + p {
+        // Make paragraph-header spacings big, but paragraph-paragraph spacings small
+        margin-top: calc(1em - #{cTypo.$body-margin});
+    }
+}

@@ -1,0 +1,37 @@
+@use '../../styles/mixins/typography.module.scss' as typo;
+
+.title {
+    @include typo.titleText;
+}
+
+.subtitle {
+    @include typo.subtitleText;
+}
+
+.header1 {
+    @include typo.header1Text;
+}
+
+.header2 {
+    @include typo.header2Text;
+}
+
+.header3 {
+    @include typo.header3Text;
+}
+
+.header4 {
+    @include typo.header4Text;
+}
+
+.header5 {
+    @include typo.header5Text;
+}
+
+.header6 {
+    @include typo.header6Text;
+}
+
+.body {
+    @include typo.body;
+}

@@ -1,0 +1,145 @@
+@use 'sass:color';
+
+@function color-shades($base-color, $step-count) {
+    @return color.adjust($base-color, $lightness: $step-count * 7%, $saturation: $step-count * 10%);
+}
+
+$base-color: #344055;
+$primary-color: #FFFFFF;
+$secondary-color: #004fbd;
+$highlight-color-a: #FF8811;
+$highlight-color-b: #60993E;
+$highlight-color-c: #C42021;
+
+$base-color-100: color-shades($base-color, -3);
+$base-color-200: color-shades($base-color, -2);
+$base-color-300: color-shades($base-color, -1);
+$base-color-400: color-shades($base-color, 0);
+$base-color-500: color-shades($base-color, 1);
+$base-color-600: color-shades($base-color, 2);
+$base-color-700: color-shades($base-color, 3);
+$base-color-800: color-shades($base-color, 4);
+$base-color-900: color-shades($base-color, 5);
+
+$primary-color-100: color-shades($primary-color, -8);
+$primary-color-200: color-shades($primary-color, -7);
+$primary-color-300: color-shades($primary-color, -6);
+$primary-color-400: color-shades($primary-color, -5);
+$primary-color-500: color-shades($primary-color, -4);
+$primary-color-600: color-shades($primary-color, -3);
+$primary-color-700: color-shades($primary-color, -2);
+$primary-color-800: color-shades($primary-color, -1);
+$primary-color-900: color-shades($primary-color, 0);
+
+$secondary-color-100: color-shades($secondary-color, -3);
+$secondary-color-200: color-shades($secondary-color, -2);
+$secondary-color-300: color-shades($secondary-color, -1);
+$secondary-color-400: color-shades($secondary-color, 0);
+$secondary-color-500: color-shades($secondary-color, 1);
+$secondary-color-600: color-shades($secondary-color, 2);
+$secondary-color-700: color-shades($secondary-color, 3);
+$secondary-color-800: color-shades($secondary-color, 4);
+$secondary-color-900: color-shades($secondary-color, 5);
+
+$highlight-color-a-100: color-shades($highlight-color-a, -3);
+$highlight-color-a-200: color-shades($highlight-color-a, -2);
+$highlight-color-a-300: color-shades($highlight-color-a, -1);
+$highlight-color-a-400: color-shades($highlight-color-a, 0);
+$highlight-color-a-500: color-shades($highlight-color-a, 1);
+$highlight-color-a-600: color-shades($highlight-color-a, 2);
+$highlight-color-a-700: color-shades($highlight-color-a, 3);
+$highlight-color-a-800: color-shades($highlight-color-a, 4);
+$highlight-color-a-900: color-shades($highlight-color-a, 5);
+
+$highlight-color-b-100: color-shades($highlight-color-b, -3);
+$highlight-color-b-200: color-shades($highlight-color-b, -2);
+$highlight-color-b-300: color-shades($highlight-color-b, -1);
+$highlight-color-b-400: color-shades($highlight-color-b, 0);
+$highlight-color-b-500: color-shades($highlight-color-b, 1);
+$highlight-color-b-600: color-shades($highlight-color-b, 2);
+$highlight-color-b-700: color-shades($highlight-color-b, 3);
+$highlight-color-b-800: color-shades($highlight-color-b, 4);
+$highlight-color-b-900: color-shades($highlight-color-b, 5);
+
+$highlight-color-c-100: color-shades($highlight-color-c, -3);
+$highlight-color-c-200: color-shades($highlight-color-c, -2);
+$highlight-color-c-300: color-shades($highlight-color-c, -1);
+$highlight-color-c-400: color-shades($highlight-color-c, 0);
+$highlight-color-c-500: color-shades($highlight-color-c, 1);
+$highlight-color-c-600: color-shades($highlight-color-c, 2);
+$highlight-color-c-700: color-shades($highlight-color-c, 3);
+$highlight-color-c-800: color-shades($highlight-color-c, 4);
+$highlight-color-c-900: color-shades($highlight-color-c, 5);
+
+$background-color: $base-color-400;
+$selection-color: $base-color-600;
+$text-color: $primary-color;
+
+:export {
+    baseColor: $base-color;
+    primaryColor: $primary-color;
+    secondaryColor: $secondary-color;
+    highlightColorA: $highlight-color-a;
+    highlightColorB: $highlight-color-b;
+    highlightColorC: $highlight-color-c;
+
+    baseColor100: $base-color-100;
+    baseColor200: $base-color-200;
+    baseColor300: $base-color-300;
+    baseColor400: $base-color-400;
+    baseColor500: $base-color-500;
+    baseColor600: $base-color-600;
+    baseColor700: $base-color-700;
+    baseColor800: $base-color-800;
+    baseColor900: $base-color-900;
+  
+    primaryColor100: $primary-color-100;
+    primaryColor200: $primary-color-200;
+    primaryColor300: $primary-color-300;
+    primaryColor400: $primary-color-400;
+    primaryColor500: $primary-color-500;
+    primaryColor600: $primary-color-600;
+    primaryColor700: $primary-color-700;
+    primaryColor800: $primary-color-800;
+    primaryColor900: $primary-color-900;
+  
+    secondaryColor100: $secondary-color-100;
+    secondaryColor200: $secondary-color-200;
+    secondaryColor300: $secondary-color-300;
+    secondaryColor400: $secondary-color-400;
+    secondaryColor500: $secondary-color-500;
+    secondaryColor600: $secondary-color-600;
+    secondaryColor700: $secondary-color-700;
+    secondaryColor800: $secondary-color-800;
+    secondaryColor900: $secondary-color-900;
+  
+    highlightColorA100: $highlight-color-a-100;
+    highlightColorA200: $highlight-color-a-200;
+    highlightColorA300: $highlight-color-a-300;
+    highlightColorA400: $highlight-color-a-400;
+    highlightColorA500: $highlight-color-a-500;
+    highlightColorA600: $highlight-color-a-600;
+    highlightColorA700: $highlight-color-a-700;
+    highlightColorA800: $highlight-color-a-800;
+    highlightColorA900: $highlight-color-a-900;
+  
+    highlightColorB100: $highlight-color-b-100;
+    highlightColorB200: $highlight-color-b-200;
+    highlightColorB300: $highlight-color-b-300;
+    highlightColorB400: $highlight-color-b-400;
+    highlightColorB500: $highlight-color-b-500;
+    highlightColorB600: $highlight-color-b-600;
+    highlightColorB700: $highlight-color-b-700;
+    highlightColorB800: $highlight-color-b-800;
+    highlightColorB900: $highlight-color-b-900;
+  
+    highlightColorC100: $highlight-color-c-100;
+    highlightColorC200: $highlight-color-c-200;
+    highlightColorC300: $highlight-color-c-300;
+    highlightColorC400: $highlight-color-c-400;
+    highlightColorC500: $highlight-color-c-500;
+    highlightColorC600: $highlight-color-c-600;
+    highlightColorC700: $highlight-color-c-700;
+    highlightColorC800: $highlight-color-c-800;
+    highlightColorC900: $highlight-color-c-900;
+}
