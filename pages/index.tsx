@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import CommonPage from '../pages/index';
+import CommonPage from '../components/pages/index';
 import { PlatformProvider, PlatformMode } from '../context/platform-context';
 
 const PLATFORM_MODE = process.env.NEXT_PUBLIC_NODE_ENV as PlatformMode;
