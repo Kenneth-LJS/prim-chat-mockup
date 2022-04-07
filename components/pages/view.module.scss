@@ -1,16 +1,470 @@
 @use '../../styles/constants/color.module.scss' as cColor;
 @use '../../styles/mixins/typography.module.scss' as typo;
 
-.title {
-    @include typo.titleText;
-    color: cColor.$base-color-100;
+.background {
+    position: fixed;
+    z-index: -1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
 }
 
-.header {
-    @include typo.header1Text;
+.layout {
+    position: fixed;
+    inset: 0;
+
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas: 'sticky-bar' 'chat' 'chat-input';
 }
 
-.body {
-    @include typo.bodyContainer;
-    @include typo.bodyText;
+.stickyBar {
+    grid-area: sticky-bar;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background-color: #f6f6f6;
+    padding: 10px 12px;
+}
+
+.stickyBarChevron {
+    height: 24px;
+}
+
+.stickyBarUser {
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    gap: 5px;
+}
+
+.stickyBarUserIcon {
+    height: 32px;
+    border-radius: 50%;
+}
+
+.stickyBarUserName {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 1px;
+}
+
+.stickyBarVideoIcon {
+    height: 24px;
+}
+
+.stickyBarCallIcon {
+    height: 24px;
+}
+
+.chatContainer {
+    grid-area: chat;
+
+    overflow: auto;
+    overscroll-behavior: auto;
+}
+
+.chat {
+    grid-area: chat;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 20px;
+}
+
+$chatBubbleTransitionSeconds: 0.3;
+
+.chatBubbleContainer {
+    display: flex;
+
+    &.self {
+        justify-content: flex-end;
+    }
+
+    &.other {
+        justify-content: flex-start;
+    }
+
+    transition: opacity #{$chatBubbleTransitionSeconds}s;
+
+    &.appearStart {
+        opacity: 0;
+    }
+
+    &.appearActive, &.appearDone {
+        opacity: 1;
+    }
+}
+
+.chatBubble {
+    padding: 8px 8px;
+    border-radius: 8px;
+    max-width: 80%;
+
+    position: relative;
+    word-break: break-word;
+
+    &.self {
+        background-color: #e1f5cb;
+    }
+
+    &.other {
+        background-color: #ffffff;
+    }
+}
+
+.chatBubbleImage {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.chatBubbleArrow {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    &.self {
+        right: 0;
+        transform: translateX(40%);
+
+        fill: #e1f5cb;
+    }
+
+    &.other {
+        left: 0;
+        transform: translateX(-40%);
+
+        fill: #ffffff;
+    }
+}
+
+.chatBubbleInlineOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.chatBubbleInlineOptions {
+    padding: 8px 8px;
+    border-radius: 8px;
+    max-width: 80%;
+
+    position: relative;
+    word-break: break-word;
+
+    &.self {
+        background-color: #e1f5cb;
+    }
+
+    &.other {
+        background-color: #ffffff;
+    }
+}
+
+.chatBubbleInlineOptionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 80%;
+}
+
+.chatBubbleInlineOptionButtonRow {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+}
+
+.chatBubbleInlineOptionButton {
+    padding: 8px 8px;
+    border-radius: 8px;
+    color: #3f73d3;
+    text-align: center;
+
+    min-width: 10px;
+    flex: 1 0 0;
+
+    border: none;
+    background-color: #ffffff;
+}
+
+.chatBubbleOptionPrompt {
+    color: #3f73d3;
+    text-align: center;
+    margin: 4px 0;
+}
+
+.chatBubbleTextSeparator {
+    background-color: #c4c4c4;
+    height: 1px;
+    margin: 0.8em 0;
+    width: 100%;
+}
+
+.chatInput {
+    grid-area: chat-input;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+
+    background-color: #f6f6f6;
+    padding: 14px 8px;
+}
+
+.chatInputPlusIcon {
+    height: 28px;
+
+    margin-bottom: 5px;
+}
+
+.chatInputBoxContainer {
+    flex-grow: 1;
+
+    background-color: white;
+    min-height: 36px;
+    border-radius: 18px;
+    border: solid 1px #d2d2d2;
+
+    padding: 0 30px 0 4px;
+
+    position: relative;
+}
+
+.chatInputBox {
+    width: 100%;
+    
+    border: none;
+    background-color: transparent;
+
+    padding: 8px 4px 8px 10px;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.chatInputStickerIcon {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+
+    height: 28px;
+}
+
+.chatInputRightButtons {
+    width: 60px;
+    height: 33px;
+    transition: width 0.3s;
+    overflow: hidden;
+
+    position: relative;
+
+    &.typing {
+        width: 28px;
+    }
+}
+
+.chatInputRightButtonsNotTyping {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 33px;
+
+    display: flex;
+    gap: 4px;
+
+    transition: opacity 0.3s;
+    &.hidden {
+        opacity: 0;
+    }
+}
+
+.chatInputRightButtonsTyping {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 32px;
+
+    display: flex;
+    gap: 8px;
+
+    transition: opacity 0.3s;
+    &.hidden {
+        opacity: 0;
+    }
+}
+
+.chatInputCameraIcon {
+    height: 28px;
+
+    margin-bottom: 5px;
+}
+
+.chatInputMicrophoneIcon {
+    height: 28px;
+
+    margin-bottom: 4px;
+}
+
+.chatInputSendMessageIcon {
+    height: 28px;
+
+    margin-bottom: 4px;
+}
+
+.emoji {
+    width: 16px;
+    height: 16px;
+}
+
+.chatDialogContainer {
+
+}
+
+.chatDialogBackground {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 10000;
+
+    // background-color: rgba(0, 0, 0, 0.4);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    &.isOpen {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.chatDialog {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+
+    background-color: white;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
+
+    z-index: 10001;
+
+    transform: translateY(100%);
+    transition: transform 0.3s;
+    &.isOpen {
+        transform: none;
+        pointer-events: auto;
+    }
+}
+
+.chatDialogCloseButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    line-height: 0;
+
+    padding: 20px;
+}
+
+.chatDialogCloseButtonImage {
+    aspect-ratio: 1;
+    width: 16px;
+    height: 16px;
+    fill: #767676;
+}
+
+.chatDialogOptions {
+    height: 10000px;
+    max-height: max(80vh, min(400px, 100vh));
+
+    font-size: 22px;
+}
+
+.chatDialogOptionsHeader {
+    text-align: center;
+    padding: 20px 16px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chatDialogOptionItems {
+
+}
+
+.chatDialogOptionItem {
+    padding: 20px 16px;
+    position: relative;
+}
+
+.chatDialogOptionItemLabel {
+    font-size: 18px;
+}
+
+.chatDialogOptionItemRadioButtonContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.chatDialogOptionItemRadioButton {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #949494;
+
+    position: relative;
+
+    &.active::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: #24c15f;
+    }
+}
+
+.chatDialogOptionsConfirmContainer {
+    padding: 16px;
+}
+
+.chatDialogOptionsConfirmButton {
+    padding: 12px;
+    text-align: center;
+    width: 100%;
+    background-color: #24c15f;
+    border-radius: 2px;
+    border: none;
+    font-size: 18px;
+    color: white;
+}
+
+:export {
+    chatBubbleTransitionSeconds: $chatBubbleTransitionSeconds;
 }

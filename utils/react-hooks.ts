@@ -1,4 +1,12 @@
-import { useState, useEffect, Dispatch, SetStateAction, MutableRefObject, useContext } from 'react';
+import {
+    useState,
+    useEffect,
+    Dispatch,
+    SetStateAction,
+    MutableRefObject,
+    useContext,
+    useRef,
+} from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import PlatformContext from '../context/platform-context';
 
@@ -14,7 +22,9 @@ export type MousePosition =
     | undefined;
 
 export function useMousePosition(): MousePosition {
-    const [mousePosition, setMousePosition] = useState(undefined as MousePosition);
+    const [mousePosition, setMousePosition] = useState(
+        undefined as MousePosition
+    );
 
     useEffect(() => {
         function handleMouseMove(event: MouseEvent) {
@@ -103,7 +113,9 @@ export function useWindowSize(): WindowSize {
 }
 
 export function useWindowWidth(): number | undefined {
-    const [windowWidth, setWindowWidth] = useState(undefined as number | undefined);
+    const [windowWidth, setWindowWidth] = useState(
+        undefined as number | undefined
+    );
     useEffect(() => {
         // Handler to call on window resize
         function handleResize() {
@@ -120,7 +132,9 @@ export function useWindowWidth(): number | undefined {
 }
 
 export function useWindowHeight(): number | undefined {
-    const [windowHeight, setWindowHeight] = useState(undefined as number | undefined);
+    const [windowHeight, setWindowHeight] = useState(
+        undefined as number | undefined
+    );
     useEffect(() => {
         // Handler to call on window resize
         function handleResize() {
@@ -191,23 +205,39 @@ export function useViewport(): Viewport {
             });
         }
 
-        windowAny.visualViewport.addEventListener('scroll', handleViewportChange);
-        windowAny.visualViewport.addEventListener('resize', handleViewportChange);
+        windowAny.visualViewport.addEventListener(
+            'scroll',
+            handleViewportChange
+        );
+        windowAny.visualViewport.addEventListener(
+            'resize',
+            handleViewportChange
+        );
 
         handleViewportChange({ target: windowAny.visualViewport });
 
         // Remove event listener on cleanup
         return () => {
-            windowAny.visualViewport.removeEventListener('resize', handleViewportChange);
-            windowAny.visualViewport.removeEventListener('scroll', handleViewportChange);
+            windowAny.visualViewport.removeEventListener(
+                'resize',
+                handleViewportChange
+            );
+            windowAny.visualViewport.removeEventListener(
+                'scroll',
+                handleViewportChange
+            );
         };
     }, []); // Empty array ensures that effect is only run on mount
 
     return viewport;
 }
 
-export function useBoundingClientRect(ref: MutableRefObject<HTMLElement>): DOMRectReadOnly | undefined {
-    const [boundingClientRect, setBoundingClientRect] = useState(undefined as (DOMRectReadOnly | undefined));
+export function useBoundingClientRect(
+    ref: MutableRefObject<HTMLElement>
+): DOMRectReadOnly | undefined {
+    const [boundingClientRect, setBoundingClientRect] = useState(
+        undefined as DOMRectReadOnly | undefined
+    );
 
     useEffect(() => {
         if (typeof ref.current == 'undefined' || ref.current === null) {
@@ -218,7 +248,9 @@ export function useBoundingClientRect(ref: MutableRefObject<HTMLElement>): DOMRe
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
             if (
                 boundingClientRect != undefined &&
                 newRect.bottom == boundingClientRect.bottom &&
@@ -254,8 +286,12 @@ export function useBoundingClientRect(ref: MutableRefObject<HTMLElement>): DOMRe
 
 type DOMRectXReadOnly = Pick<DOMRectReadOnly, 'left' | 'right' | 'width' | 'x'>;
 
-export function useBoundingClientRectX(ref: MutableRefObject<HTMLElement>): DOMRectXReadOnly | undefined {
-    const [boundingClientRect, setBoundingClientRect] = useState(undefined as (DOMRectXReadOnly | undefined));
+export function useBoundingClientRectX(
+    ref: MutableRefObject<HTMLElement>
+): DOMRectXReadOnly | undefined {
+    const [boundingClientRect, setBoundingClientRect] = useState(
+        undefined as DOMRectXReadOnly | undefined
+    );
 
     useEffect(() => {
         if (typeof ref.current == 'undefined' || ref.current === null) {
@@ -266,7 +302,9 @@ export function useBoundingClientRectX(ref: MutableRefObject<HTMLElement>): DOMR
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
             if (
                 boundingClientRect != undefined &&
                 newRect.left === boundingClientRect.left &&
@@ -296,10 +334,17 @@ export function useBoundingClientRectX(ref: MutableRefObject<HTMLElement>): DOMR
     return boundingClientRect;
 }
 
-type DOMRectYReadOnly = Pick<DOMRectReadOnly, 'bottom' | 'height' | 'top' | 'y'>;
+type DOMRectYReadOnly = Pick<
+    DOMRectReadOnly,
+    'bottom' | 'height' | 'top' | 'y'
+>;
 
-export function useBoundingClientRectY(ref: MutableRefObject<HTMLElement>): DOMRectYReadOnly | undefined {
-    const [boundingClientRect, setBoundingClientRect] = useState(undefined as (DOMRectYReadOnly | undefined));
+export function useBoundingClientRectY(
+    ref: MutableRefObject<HTMLElement>
+): DOMRectYReadOnly | undefined {
+    const [boundingClientRect, setBoundingClientRect] = useState(
+        undefined as DOMRectYReadOnly | undefined
+    );
 
     useEffect(() => {
         if (typeof ref.current == 'undefined' || ref.current === null) {
@@ -310,7 +355,9 @@ export function useBoundingClientRectY(ref: MutableRefObject<HTMLElement>): DOMR
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
             if (
                 boundingClientRect != undefined &&
                 newRect.bottom == boundingClientRect.bottom &&
@@ -357,8 +404,14 @@ export function useSize(ref: MutableRefObject<HTMLElement>): Size | undefined {
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
-            if (size != undefined && newRect.width == size.width && newRect.height == size.height) {
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
+            if (
+                size != undefined &&
+                newRect.width == size.width &&
+                newRect.height == size.height
+            ) {
                 return;
             }
 
@@ -379,7 +432,9 @@ export function useSize(ref: MutableRefObject<HTMLElement>): Size | undefined {
     return size;
 }
 
-export function useWidth(ref: MutableRefObject<HTMLElement>): number | undefined {
+export function useWidth(
+    ref: MutableRefObject<HTMLElement>
+): number | undefined {
     const [width, setWidth] = useState(undefined);
 
     useEffect(() => {
@@ -391,7 +446,9 @@ export function useWidth(ref: MutableRefObject<HTMLElement>): number | undefined
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
             if (width === newRect.width) {
                 return;
             }
@@ -412,7 +469,9 @@ export function useWidth(ref: MutableRefObject<HTMLElement>): number | undefined
     return width;
 }
 
-export function useHeight(ref: MutableRefObject<HTMLElement>): number | undefined {
+export function useHeight(
+    ref: MutableRefObject<HTMLElement>
+): number | undefined {
     const [height, setHeight] = useState(undefined);
 
     useEffect(() => {
@@ -424,7 +483,9 @@ export function useHeight(ref: MutableRefObject<HTMLElement>): number | undefine
             if (typeof ref.current == 'undefined' || ref.current === null) {
                 return;
             }
-            const newRect = DOMRectReadOnly.fromRect(ref.current.getBoundingClientRect());
+            const newRect = DOMRectReadOnly.fromRect(
+                ref.current.getBoundingClientRect()
+            );
             if (height === newRect.height) {
                 return;
             }
@@ -486,7 +547,8 @@ export function useWindowLocation(): WindowLocation {
         }
         window.addEventListener('popstate', handleLocationChange);
         handleLocationChange();
-        return () => window.removeEventListener('popstate', handleLocationChange);
+        return () =>
+            window.removeEventListener('popstate', handleLocationChange);
     }, []);
 
     return windowLocation;
@@ -527,7 +589,10 @@ export type LocalStorage =
       }
     | undefined;
 
-export function useLocalStorage(): [LocalStorage, Dispatch<SetStateAction<LocalStorage>>] {
+export function useLocalStorage(): [
+    LocalStorage,
+    Dispatch<SetStateAction<LocalStorage>>
+    ] {
     const [localStorage, setLocalStorage] = useState(undefined as LocalStorage);
 
     useEffect(() => {
@@ -553,4 +618,46 @@ export function useLocalStorage(): [LocalStorage, Dispatch<SetStateAction<LocalS
     }
 
     return [localStorage, updateLocalStorage];
+}
+
+type StateUpdater<T> = (value: T) => T;
+type StateCallbackAfterUpdate<T> = (value: T) => void;
+type StateUpdateCallback<T> = (
+    update: StateUpdater<T>,
+    callback?: StateCallbackAfterUpdate<T> | undefined
+) => void;
+
+export function useStateCallback<T>(data: T): [T, StateUpdateCallback<T>] {
+    const [state, setState] = useState(data);
+    const [updateTimestamp, setUpdateTimestamp] = useState(0);
+
+    const callbackQueueRef = useRef(
+        [] as [StateUpdater<T>, StateCallbackAfterUpdate<T>][]
+    );
+
+    const setStateWithCallback: StateUpdateCallback<T> = (
+        update: StateUpdater<T>,
+        callback?: StateCallbackAfterUpdate<T>
+    ) => {
+        callbackQueueRef.current = [
+            ...callbackQueueRef.current,
+            [update, callback],
+        ];
+        setUpdateTimestamp(new Date().getTime());
+    };
+
+    useEffect(() => {
+        if (callbackQueueRef.current.length === 0) {
+            return;
+        }
+        let curState = state;
+        callbackQueueRef.current.forEach(([updateFn, callbackFn]) => {
+            curState = updateFn(curState);
+            callbackFn && callbackFn(curState);
+        });
+        callbackQueueRef.current = [];
+        setState(curState);
+    }, [updateTimestamp]);
+
+    return [state, setStateWithCallback];
 }
