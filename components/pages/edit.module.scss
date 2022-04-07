@@ -1,0 +1,122 @@
+@use '../../styles/constants/color.module.scss' as cColor;
+@use '../../styles/mixins/typography.module.scss' as typo;
+
+.title {
+    @include typo.titleText;
+    color: cColor.$base-color-100;
+}
+
+.header {
+    @include typo.header1Text;
+}
+
+.body {
+    @include typo.bodyContainer;
+    @include typo.bodyText;
+}
+
+.dndflow {
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  height: 100vh;
+  width: 100%;
+}
+
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .dndnode {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  height: 20px;
+  padding: 20px;
+  border: 1px solid #1a192b;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+.dndflow .reactflowWrapper {
+  flex-grow: 1;
+  height: 100%;
+  background-color: #f7f7ff;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+}
+
+.textNode label {
+  display: block;
+  font-size: 11px;
+}
+
+.textNode {
+  width: 200px;
+  border: 1px solid #1a192b;
+  border-radius: 3px;
+  padding:10px;
+}
+
+.textNode li {
+  list-style: inside;
+  padding-left: 5px;
+}
+
+.edgebutton-foreignobject div {
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20px;
+}
+
+.edgeLabel, .description {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.saveBtn {
+  font-family: 'Roboto', sans-serif;
+  width: 60px;
+  height: 40px;
+  margin: 20px;
+}
+
+.edgebutton {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.edgeLabel {
+  font-size: 12px;
+}
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 250px;
+  }
+}
