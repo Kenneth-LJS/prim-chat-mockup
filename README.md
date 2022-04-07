@@ -1,13 +1,5 @@
+DEMO:
 
-
-# todo
-
-set up webpack
-
-come up with unique page content for each page
-
-custom link and image elements components (handles relative vs absolute for image, handles .html for link)
-
-rebuild components
-
-clean up package.json
+1. `npm run dev`
+2. Editor page: `http://localhost:3000/edit/4`
+3. Prototype page: `http://localhost:3000/view/job-notification-v3`
